@@ -8,10 +8,13 @@ const mongoDB_url = 'mongodb+srv://vercel-admin-user:IkTvQkmsdCnx1gsW@cluster0.v
 async function main() {
 
     try {
+
         // connecting to mongo 
         var mongoClient = null;
         mongoClient = new MongoClient(mongoDB_url);
-        await mongoClient.connect();
+        const connection = await mongoClient.connect();
+        const db = connection.db('bidstacker');
+
     } catch (error) {
         console.error(error);
     } finally {
@@ -19,10 +22,16 @@ async function main() {
             await mongoClient.close();
         }
     }
+
+    const insertSomething = async () => {
+        return db.collection('test').insertOne({test: 'I am a test, no more'});
+    }
     
     
     // our routes
     app.get('/', (req, res) => {
+
+        var res_ = await insertSomething();
     
         res.send('We are Live!');
     });
