@@ -24,12 +24,12 @@ async function main() {
     }
 
     const insertSomething = async () => {
-        return await db.collection('test').insertOne({test: 'I am a test, no more'});
+        return db.collection('test').insertOne({test: 'I am a test, no more'});
     }
     
     
     // our routes
-    app.get('/', (req, res) => {
+    app.get('/', async (req, res) => {
 
         var res_ = await insertSomething();
     
