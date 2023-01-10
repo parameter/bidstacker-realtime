@@ -26,6 +26,11 @@ async function main() {
     
         res.send('We are Live!');
     });
+
+    app.post('/new-data', (req, res) => {
+    
+        res.send(req.body.data);
+    });
 }
 
 main();
