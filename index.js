@@ -8,8 +8,9 @@ const mongoDB_url = 'mongodb+srv://vercel-admin-user:IkTvQkmsdCnx1gsW@cluster0.v
 async function main() {
 
     try {
-        // connecting to mongo
-        const mongoClient = new MongoClient(mongoDB_url);
+        // connecting to mongo 
+        var mongoClient = null;
+        mongoClient = new MongoClient(mongoDB_url);
         await mongoClient.connect();
     } catch (error) {
         console.error(error);
