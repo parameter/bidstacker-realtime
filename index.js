@@ -24,7 +24,7 @@ async function main() {
     // our routes
     app.get('/', (req, res) => {
     
-        res.send(JSON.stringify(error));
+        res.send('We are Live!');
     });
 }
 
