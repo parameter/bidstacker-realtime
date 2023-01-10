@@ -24,7 +24,7 @@ async function main() {
     }
 
     const insertSomething = async () => {
-        return db.collection('test').insertOne({test: 'I am a test, no more'});
+        return await db.collection('test').insertOne({test: 'I am a test, no more'});
     }
     
     
