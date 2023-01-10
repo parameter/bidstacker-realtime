@@ -29,7 +29,7 @@ async function main() {
 
     app.post('/new-data', (req, res) => {
     
-        res.send({result: JSON.stringify(req.body)});
+        res.send({result: 'I am the result'});
     });
 }
 
