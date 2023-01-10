@@ -14,7 +14,9 @@ async function main() {
     } catch (error) {
         console.error(error);
     } finally {
-        await mongoClient.close();
+        if (mongoClient) {
+            await mongoClient.close();
+        }
     }
     
     
