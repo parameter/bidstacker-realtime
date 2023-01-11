@@ -16,11 +16,11 @@ async function main() {
     server.listen(666);
 
     io.on("connection", (socket) => {
-        console.log('WE HAVE A CONNECTION');
+        console.log('WE HAVE A CONNECTION', socket);
     });
 
 
-    
+
     try {
 
 
