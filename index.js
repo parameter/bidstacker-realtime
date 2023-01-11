@@ -14,12 +14,7 @@ async function main() {
     const io = require("socket.io")(httpServer, options);
 
     // The server should start listening
-    // httpServer.listen(80);
-
-    httpServer.listen('https://bidstacker.vercel.app', function() {
-        console.log('httpServer listening on port %d', app.get('http_port'));
-        ee.emit('ready', 'httpServerReady');
-    });
+    httpServer.listen(80);
 
     io.on("connection", (socket) => {
         console.log('WE HAVE A CONNECTION', socket);
