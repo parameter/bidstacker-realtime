@@ -5,7 +5,16 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const cors = require('cors');
+
+/*
 app.use(cors({ origin: 'https://bidstacker.vercel.app' }));
+*/
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); 
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 const mongoDB_url = 'mongodb+srv://vercel-admin-user:IkTvQkmsdCnx1gsW@cluster0.vp8fpep.mongodb.net/?retryWrites=true&w=majority';
 
