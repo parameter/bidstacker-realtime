@@ -18,7 +18,7 @@ async function main() {
     const io = require("socket.io")(httpsServer, options);
 
     // The server should start listening
-    httpsServer.listen(8080);
+    httpsServer.listen(80);
 
     console.log('listening...');
 
