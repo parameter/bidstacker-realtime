@@ -1,4 +1,5 @@
 const express = require('express');
+var http = require('http');
 const { MongoClient } = require('mongodb');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -7,25 +8,42 @@ const mongoDB_url = 'mongodb+srv://vercel-admin-user:IkTvQkmsdCnx1gsW@cluster0.v
 
 async function main() {
 
+    var server = http.createServer(app);
+    // Pass a http.Server instance to the listen method
+    var io = require('socket.io').listen(server);
+
+    // The server should start listening
+    server.listen(666);
+
+    io.on("connection", (socket) => {
+        console.log('WE HAVE A CONNECTION');
+    });
+
+
+    
     try {
 
-        // connecting to mongo 
-        var mongoClient = null;
-        mongoClient = new MongoClient(mongoDB_url);
-        const connection = await mongoClient.connect();
-        const db = connection.db('bidstacker');
 
     } catch (error) {
         console.error(error);
     } finally {
+        /*
         if (mongoClient) {
             await mongoClient.close();
-        }
+        } */
     }
 
     const insertSomething = async () => {
+
+        var mongoClient = null;
+        mongoClient = new MongoClient('mongodb+srv://vercel-admin-user:IkTvQkmsdCnx1gsW@cluster0.vp8fpep.mongodb.net/?retryWrites=true&w=majority');
+        const connection = await mongoClient.connect();
+        const db = connection.db('bidstacker');
+
         return db.collection('test').insertOne({test: 'I am a test, no more'});
     }
+
+    
     
     
     // our routes
