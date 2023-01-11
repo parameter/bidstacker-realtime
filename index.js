@@ -14,7 +14,7 @@ async function main() {
     const io = require("socket.io")(httpServer, options);
 
     // The server should start listening
-    httpServer.listen(8080);
+    httpServer.listen(80);
 
     io.on("connection", (socket) => {
         console.log('WE HAVE A CONNECTION', socket);
