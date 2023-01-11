@@ -59,12 +59,16 @@ async function main() {
     
     
     // our routes
+
+    /*
     app.get('/', async (req, res) => {
 
         var res_ = await insertSomething();
     
         res.send('We are Live!');
     });
+
+    */
 
     app.post('/new-data', (req, res) => {
     
