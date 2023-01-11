@@ -4,6 +4,9 @@ const { MongoClient } = require('mongodb');
 const app = express();
 const port = process.env.PORT || 3000;
 
+const cors = require('cors');
+app.use(cors({ origin: 'https://bidstacker.vercel.app' }));
+
 const mongoDB_url = 'mongodb+srv://vercel-admin-user:IkTvQkmsdCnx1gsW@cluster0.vp8fpep.mongodb.net/?retryWrites=true&w=majority';
 
 async function main() {
