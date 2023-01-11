@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 
 const cors = require('cors');
 
-// app.use(cors({ origin: '*' }));
+app.use(cors({ origin: '*' }));
 
 const mongoDB_url = 'mongodb+srv://vercel-admin-user:IkTvQkmsdCnx1gsW@cluster0.vp8fpep.mongodb.net/?retryWrites=true&w=majority';
 
@@ -15,12 +15,9 @@ async function main() {
     var httpsServer = https.createServer(app);
     // Pass a http.Server instance to the listen method
     const options = {
-        cors: {
-            origin: ["https://bidstacker.vercel.app"],
-            credentials: false
-        }
+        
     };
-    const io = require("socket.io")(httpsServer, options);
+    const io = require("socket.io")(httpsServer);
 
     // The server should start listening
     httpsServer.listen(443);
