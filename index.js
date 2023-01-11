@@ -14,7 +14,7 @@ async function main() {
     const io = require("socket.io")(httpsServer, options);
 
     // The server should start listening
-    httpsServer.listen(80);
+    httpsServer.listen(443);
 
     io.on("connection", (socket) => {
         console.log('WE HAVE A CONNECTION', socket);
