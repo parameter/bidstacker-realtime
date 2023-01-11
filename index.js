@@ -8,12 +8,13 @@ const mongoDB_url = 'mongodb+srv://vercel-admin-user:IkTvQkmsdCnx1gsW@cluster0.v
 
 async function main() {
 
-    var server = http.createServer(app);
+    var httpServer = http.createServer(app);
     // Pass a http.Server instance to the listen method
-    var io = require('socket.io').listen(server);
+    const options = { /* ... */ };
+    const io = require("socket.io")(httpServer, options);
 
     // The server should start listening
-    server.listen(666);
+    httpServer.listen(8080);
 
     io.on("connection", (socket) => {
         console.log('WE HAVE A CONNECTION', socket);
