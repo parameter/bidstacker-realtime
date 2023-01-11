@@ -14,11 +14,16 @@ async function main() {
 
     var httpsServer = https.createServer(app);
     // Pass a http.Server instance to the listen method
-    const options = { /* ... */ };
+    const options = {
+        cors: {
+            origin: ["https://bidstacker.vercel.app"],
+            credentials: false
+        }
+    };
     const io = require("socket.io")(httpsServer, options);
 
     // The server should start listening
-    httpsServer.listen(80);
+    httpsServer.listen(443);
 
     console.log('listening...');
 
