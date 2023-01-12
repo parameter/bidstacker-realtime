@@ -17,7 +17,7 @@ async function main() {
     const io = require('socket.io')(httpServer, {
         cors: {
             origin: "https://bidstacker.vercel.app",
-            credentials: false
+            /* credentials: false */
         }
     });
 
