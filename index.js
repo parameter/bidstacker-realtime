@@ -20,7 +20,7 @@ async function main() {
     const io = new Server(httpServer, {
         path: "/soxx/",
         cors: {
-            origin: "https://bidstacker.vercel.app/",
+            origin: "https://bidstacker.vercel.app",
             credentials: false
         }
     });
@@ -28,7 +28,7 @@ async function main() {
     // The server should start listening
     httpServer.listen(1337);
 
-    console.log('listening...');
+    console.log('listening....');
 
     io.on("connection", (socket) => {
         console.log('WE HAVE A CONNECTION', socket);
