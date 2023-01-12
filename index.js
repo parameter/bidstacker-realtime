@@ -4,8 +4,6 @@ const { MongoClient } = require('mongodb');
 const app = express();
 const port = process.env.PORT || 3000;
 
-import { Server } from "socket.io";
-
 const cors = require('cors');
 
 app.use(cors({ origin: '*' }));
@@ -15,9 +13,8 @@ const mongoDB_url = 'mongodb+srv://vercel-admin-user:IkTvQkmsdCnx1gsW@cluster0.v
 async function main() {
 
     var httpServer = http.createServer(app);
-    // Pass a http.Server instance to the listen method
 
-    const io = new Server(httpServer, {
+    const io = require('socket.io')(httpServer, {
         path: "/soxx/",
         cors: {
             origin: "https://bidstacker.vercel.app",
