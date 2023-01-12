@@ -15,7 +15,6 @@ async function main() {
     var httpServer = http.createServer(app);
 
     const io = require('socket.io')(httpServer, {
-        path: "/soxx/",
         cors: {
             origin: "https://bidstacker.vercel.app",
             credentials: false
