@@ -20,7 +20,7 @@ async function main() {
     const io = require("socket.io")(httpServer);
 
     // The server should start listening
-    httpServer.listen(666);
+    httpServer.listen(1337);
 
     console.log('listening...');
 
