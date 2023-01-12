@@ -4,6 +4,8 @@ const { MongoClient } = require('mongodb');
 const app = express();
 const port = process.env.PORT || 3000;
 
+import { Server } from "socket.io";
+
 const cors = require('cors');
 
 app.use(cors({ origin: '*' }));
@@ -14,10 +16,12 @@ async function main() {
 
     var httpServer = http.createServer(app);
     // Pass a http.Server instance to the listen method
-    const options = {
-        
-    };
     const io = require("socket.io")(httpServer);
+
+    const io = new Server(httpServer, {
+        path: "/soxx/"
+    });
+
 
     // The server should start listening
     httpServer.listen(1337);
