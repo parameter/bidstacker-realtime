@@ -18,7 +18,11 @@ async function main() {
     // Pass a http.Server instance to the listen method
 
     const io = new Server(httpServer, {
-        path: "/soxx/"
+        path: "/soxx/",
+        cors: {
+            origin: "https://bidstacker.vercel.app/",
+            credentials: false
+        }
     });
 
     // The server should start listening
