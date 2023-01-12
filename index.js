@@ -1,79 +1,21 @@
 const express = require('express');
-var https = require('https');
-const { MongoClient } = require('mongodb');
+const path = require('path');
+const { createServer } = require('http');
+
+const WebSocket = require('ws');
+
 const app = express();
-const port = process.env.PORT || 3000;
 
-const cors = require('cors');
-app.use(cors({ origin: '*' }));
+const server = createServer(app);
+const wss = new WebSocket.Server({ server });
 
-const mongoDB_url = 'mongodb+srv://vercel-admin-user:IkTvQkmsdCnx1gsW@cluster0.vp8fpep.mongodb.net/?retryWrites=true&w=majority';
+wss.on('connection', function (ws) {
 
-async function main() {
-
-    var httpsServer = https.createServer(app);
-
-    const io = require('socket.io')(httpsServer, {
-        cors: {
-            origin: "https://bidstacker.vercel.app",
-            credentials: false 
-        }
-    });
-
-    // The server should start listening
-    httpsServer.listen(443);
-
-    console.log('listening....');
-
-    io.on("connection", (socket) => {
-        console.log('WE HAVE A CONNECTION', socket);
-    });
+  console.log('MF connection just happened');
 
 
+});
 
-    try {
-
-
-    } catch (error) {
-        console.error(error);
-    } finally {
-        /*
-        if (mongoClient) {
-            await mongoClient.close();
-        } */
-    }
-
-    const insertSomething = async () => {
-
-        var mongoClient = null;
-        mongoClient = new MongoClient('mongodb+srv://vercel-admin-user:IkTvQkmsdCnx1gsW@cluster0.vp8fpep.mongodb.net/?retryWrites=true&w=majority');
-        const connection = await mongoClient.connect();
-        const db = connection.db('bidstacker');
-
-        return db.collection('test').insertOne({test: 'I am a test, no more'});
-    }
-
-    
-    
-    
-    // our routes
-
-    /*
-    app.get('/', async (req, res) => {
-
-        var res_ = await insertSomething();
-    
-        res.send('We are Live!');
-    });
-
-    */
-
-    app.post('/new-data', (req, res) => {
-    
-        res.send({result: 'I am the result'});
-    });
-}
-
-main();
-
-app.listen(port, () => console.log(`sample-expressjs app listening on port ${port}!`));
+server.listen(8080, function () {
+  console.log('Listening on http://0.0.0.0:8080');
+});
