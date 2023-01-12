@@ -1,5 +1,5 @@
 const express = require('express');
-var https = require('https');
+var http = require('http');
 const { MongoClient } = require('mongodb');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,15 +12,15 @@ const mongoDB_url = 'mongodb+srv://vercel-admin-user:IkTvQkmsdCnx1gsW@cluster0.v
 
 async function main() {
 
-    var httpsServer = https.createServer(app);
+    var httpServer = http.createServer(app);
     // Pass a http.Server instance to the listen method
     const options = {
         
     };
-    const io = require("socket.io")(httpsServer);
+    const io = require("socket.io")(httpServer);
 
     // The server should start listening
-    httpsServer.listen(443);
+    httpServer.listen(666);
 
     console.log('listening...');
 
