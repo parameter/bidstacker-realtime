@@ -5,6 +5,7 @@ const app = express();
 
 //CORS
 const cors = require('cors');
+
 app.use(cors());
 
 app.use(express.json());
@@ -25,11 +26,16 @@ db.once('open', function () {
   console.log('Connected to MongoDB');
 });
 
-const port = process.env.PORT || 1337;
+const port = process.env.PORT || 8080;
 const server = app.listen(port, () =>
   console.log(`Server running on port ${port}`)
 );
-const io = require('socket.io')(server, { origins: 'https://bidstacker.vercel.app' });
+const io = require('socket.io')(server, {
+  cors: {
+    origin: 'https://bidstacker.vercel.app',
+    methods: ['GET', 'POST'],
+  },
+});
 
 io.on('connection', (socket) => {
   console.log(`A user connected: ${socket.id}`);
