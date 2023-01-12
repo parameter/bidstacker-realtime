@@ -1,5 +1,5 @@
 const express = require('express');
-var http = require('http');
+var https = require('https');
 const { MongoClient } = require('mongodb');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -11,17 +11,17 @@ const mongoDB_url = 'mongodb+srv://vercel-admin-user:IkTvQkmsdCnx1gsW@cluster0.v
 
 async function main() {
 
-    var httpServer = http.createServer(app);
+    var httpsServer = https.createServer(app);
 
-    const io = require('socket.io')(httpServer, {
+    const io = require('socket.io')(httpsServer, {
         cors: {
-            origin: "https://bidstacker.vercel.app",
+            origin: "https://bidstacker.vercel.app:443",
             credentials: false 
         }
     });
 
     // The server should start listening
-    httpServer.listen(1337);
+    httpsServer.listen(443);
 
     console.log('listening....');
 
