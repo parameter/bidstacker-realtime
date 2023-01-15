@@ -10,6 +10,8 @@ app.use(corsMiddleware);
 
 const WebSocket = require('ws');
 
+console.log('HERE we are again');
+
 const server = createServer(app);
 const wss = new WebSocket.Server({ server });
 
