@@ -23,8 +23,9 @@ const wss = new WebSocket.Server({
 
 var clients = [];
 
-wss.on('connection', function (ws) {
-  const id = wss.getUniqueID();
+wss.on('connection', function (ws, req) {
+  var id = req.headers['sec-websocket-key'];
+  
   // add client to an array
   clients.push({id: id, ws: ws});
 
