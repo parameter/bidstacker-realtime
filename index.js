@@ -14,11 +14,17 @@ const WebSocket = require('ws');
 console.log('HERE we are again');
 
 const server = createServer(app);
-const wss = new WebSocket.Server({ server });
+
+// no longer using the express server
+const wss = new WebSocket.Server({ 
+  port: 8080, 
+  clientTracking: true 
+});
 
 wss.on('connection', function (ws) {
 
   console.log('We are connected ',ws.id);
+  console.log(wss.clients);
   
     wss.clients[ws].send("Hej " + ws.id + " from the server");
   
