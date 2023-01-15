@@ -16,14 +16,11 @@ const server = createServer(app);
 const wss = new WebSocket.Server({ server });
 
 wss.on('connection', function (ws) {
-  const id = setInterval(function () {
-    ws.send(JSON.stringify(process.memoryUsage()), function () {
-      //
-      // Ignore errors.
-      //
-    });
-  }, 100);
-  console.log('started client interval');
+
+  console.log(ws);
+  
+    ws.send("Hej from the server");
+  
 
   ws.on('close', function () {
     console.log('stopping client interval');
