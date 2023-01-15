@@ -23,7 +23,7 @@ const wss = new WebSocket.Server({
 
 wss.on('connection', function (ws) {
 
-  console.log('We are connected ',ws.id);
+  console.log('We are connected to this ID hopefully ',ws.id);
   console.log(wss.clients);
   
     wss.clients[ws].send("Hej " + ws.id + " from the server");
