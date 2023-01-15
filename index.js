@@ -18,9 +18,9 @@ const wss = new WebSocket.Server({ server });
 
 wss.on('connection', function (ws) {
 
-  console.log('We are connected');
+  console.log('We are connected ',ws.id);
   
-    wss.clients[ws.id].send("Hej " + ws.id + " from the server");
+    wss.clients[ws].send("Hej " + ws.id + " from the server");
   
 
   ws.on('close', function () {
