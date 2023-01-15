@@ -32,6 +32,12 @@ wss.on('connection', function (ws, req) {
   console.log('We are connected to this ID hopefully ', id);
   console.log(wss.clients);
 
+  setTimeout(() => {
+    clients.forEach((client) => {
+      console.log('Try to send to ', client.id);
+      client.ws.send('A message from the server ', client.id);
+    });
+  },10000)
   
 
   ws.on('close', function () {
@@ -39,12 +45,7 @@ wss.on('connection', function (ws, req) {
   });
 });
 
-setTimeout(() => {
-  clients.forEach((client) => {
-    console.log('Try to send to ', client.id);
-    client.ws.send('A message from the server ', client.id);
-  });
-},30000)
+
 
 server.listen(888, function () {
   console.log('Listening on http://0.0.0.0:888');
