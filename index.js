@@ -17,14 +17,13 @@ const wss = new WebSocket.Server({ server });
 
 wss.on('connection', function (ws) {
 
-  console.log(ws);
+  console.log('We are connected');
   
     ws.send("Hej from the server");
   
 
   ws.on('close', function () {
-    console.log('stopping client interval');
-    clearInterval(id);
+    
   });
 });
 
