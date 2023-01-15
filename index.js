@@ -6,6 +6,7 @@ const { createServer } = require('http');
 const corsMiddleware = require('./cors');
 
 const app = express();
+app.options('*', corsMiddleware);
 app.use(corsMiddleware);
 
 const WebSocket = require('ws');
