@@ -29,7 +29,7 @@ wss.on('connection', function (ws, req) {
   // add client to an array
   clients.push({id: id, ws: ws});
 
-  console.log('We are connected to this ID hopefully ', id);
+  console.log('We are connected to this ID hopefully WTF ', id);
   console.log(wss.clients);
 
   setTimeout(() => {
