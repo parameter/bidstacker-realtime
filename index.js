@@ -27,7 +27,7 @@ wss.on('connection', function (ws, req) {
   var id = req.headers['sec-websocket-key'];
 
   // add client to an array
-  clients.push({id: id, ws: ws});
+  clients.push({'id': id, 'ws': ws});
 
   console.log('We are connected to this ID hopefully WTF ', id);
   console.log(wss.clients);
@@ -35,7 +35,7 @@ wss.on('connection', function (ws, req) {
   setTimeout(() => {
     clients.forEach((client) => {
       console.log('Try to send to ', client.id);
-      client.ws.send('A message from the server ', client.id);
+      client.ws.send('A message from the server to ' + client.id);
     });
   },10000)
   
