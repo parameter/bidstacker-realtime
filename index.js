@@ -21,18 +21,28 @@ const wss = new WebSocket.Server({
   clientTracking: true 
 });
 
-wss.on('connection', function (ws) {
+var clients = [];
 
-  console.log('We are connected to this ID hopefully ',ws.id);
+wss.on('connection', function (ws) {
+  const id = wss.getUniqueID();
+  // add client to an array
+  clients.push({id: id, ws: ws});
+
+  console.log('We are connected to this ID hopefully ', id);
   console.log(wss.clients);
-  
-    wss.clients[ws].send("Hej " + ws.id + " from the server");
+
   
 
   ws.on('close', function () {
     console.log('Closed already');
   });
 });
+
+setTimeout(() => {
+  clients.forEach((client) => {
+    client.ws.send('A message from the server ', client.id);
+  });
+},20000)
 
 server.listen(888, function () {
   console.log('Listening on http://0.0.0.0:888');
