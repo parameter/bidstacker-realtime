@@ -25,7 +25,7 @@ var clients = [];
 
 wss.on('connection', function (ws, req) {
   var id = req.headers['sec-websocket-key'];
-  
+
   // add client to an array
   clients.push({id: id, ws: ws});
 
@@ -41,9 +41,10 @@ wss.on('connection', function (ws, req) {
 
 setTimeout(() => {
   clients.forEach((client) => {
+    console.log('Try to send to ', client.id);
     client.ws.send('A message from the server ', client.id);
   });
-},20000)
+},30000)
 
 server.listen(888, function () {
   console.log('Listening on http://0.0.0.0:888');
