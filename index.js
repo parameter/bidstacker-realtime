@@ -19,7 +19,7 @@ wss.on('connection', function (ws) {
 
   console.log('We are connected');
   
-    ws.send("Hej from the server");
+    // ws.send("Hej from the server");
   
 
   ws.on('close', function () {
