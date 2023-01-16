@@ -3,17 +3,17 @@
 const express = require('express');
 const path = require('path');
 const { createServer } = require('http');
+const bodyParser = require('body-parser');
 const corsMiddleware = require('./cors');
 
 const app = express();
 app.options('*', corsMiddleware);
 app.use(corsMiddleware);
+app.use(bodyParser.json());
 
 const WebSocket = require('ws');
 
-console.log('HERE we are again');
-
-const server = createServer(app);
+const expressServer = createServer(app);
 
 // no longer using the express server
 const wss = new WebSocket.Server({ 
@@ -45,9 +45,13 @@ wss.on('connection', function (ws, req) {
   });
 });
 
+app.post('/new-negotiation', (req, res) => {
+  
+  
+  res.json({ wtf: req.body });
+});
 
-
-server.listen(888, function () {
+expressServer.listen(888, function () {
   console.log('Listening on http://0.0.0.0:888');
 });
 
