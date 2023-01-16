@@ -45,6 +45,12 @@ wss.on('connection', function (ws, req) {
   });
 });
 
+app.get('/', (req, res) => {
+  
+  
+  res.json({ wtf: 'nothing here' });
+});
+
 app.post('/new-negotiation', (req, res) => {
   
   
