@@ -11,11 +11,11 @@ app.options('*', corsMiddleware);
 app.use(corsMiddleware);
 app.use(bodyParser.json());
 
-const WebSocket = require('ws');
-
 const expressServer = createServer(app);
 
-// no longer using the express server
+/*
+const WebSocket = require('ws');
+
 const wss = new WebSocket.Server({ 
   port: 8080, 
   clientTracking: true 
@@ -43,16 +43,15 @@ wss.on('connection', function (ws, req) {
   ws.on('close', function () {
     console.log('Closed already');
   });
-});
+}); 
+*/
 
 app.get('/', (req, res) => {
-  
   
   res.json({ wtf: 'nothing here' });
 });
 
 app.post('/new-negotiation', (req, res) => {
-  
   
   res.json({ wtf: req.body });
 });
