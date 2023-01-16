@@ -45,13 +45,13 @@ wss.on('connection', function (ws, req) {
   });
 });
 
-expressServer.get('/', (req, res) => {
+app.get('/', (req, res) => {
   
   
   res.json({ wtf: 'nothing here' });
 });
 
-expressServer.post('/new-negotiation', (req, res) => {
+app.post('/new-negotiation', (req, res) => {
   
   
   res.json({ wtf: req.body });
