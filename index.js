@@ -45,19 +45,19 @@ wss.on('connection', function (ws, req) {
   });
 });
 
-app.get('/', (req, res) => {
+expressServer.get('/', (req, res) => {
   
   
   res.json({ wtf: 'nothing here' });
 });
 
-app.post('/new-negotiation', (req, res) => {
+expressServer.post('/new-negotiation', (req, res) => {
   
   
   res.json({ wtf: req.body });
 });
 
-app.listen(443, function () {
-  console.log('Listening on http://0.0.0.0:443');
+expressServer.listen(888, function () {
+  console.log('Listening on http://0.0.0.0:888');
 });
 
