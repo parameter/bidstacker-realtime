@@ -24,7 +24,7 @@ httpServer.listen( port, function listening() {
     console.log( 'listening on ' + port );
 });
 
-const expressServer = createServer(app);
+
 
 /*
 const WebSocket = require('ws');
@@ -67,7 +67,8 @@ app.post('/new-negotiation', (req, res) => {
   res.json({ wtf: req.body });
 });
 
+/*
 expressServer.listen(888, function () {
   console.log('Listening on http://0.0.0.0:888');
 });
-
+*/
