@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use( express.static('public') );
 
 
-const httpServer = http.createServer( credentials, app );
+const httpServer = http.createServer(app);
 const wss = new websocket.Server({ server: httpServer, path: '/socket' });
 
 httpServer.listen( port, function listening() {
