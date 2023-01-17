@@ -14,14 +14,20 @@ app.options('*', corsMiddleware);
 app.use(corsMiddleware);
 app.use(bodyParser.json());
 
-app.use( express.static('public') );
-
 
 const httpServer = http.createServer(app);
 const wss = new websocket.Server({ server: httpServer, path: '/socket' });
 
 httpServer.listen( port, function listening() {
     console.log( 'listening on wft ' + port );
+});
+
+app.get('/test', (req, res) => {
+  res.json({ wtf: 'nothing here' });
+});
+
+app.post('/new-negotiation', (req, res) => {
+  res.json({ wtf: req.body });
 });
 
 
@@ -58,13 +64,7 @@ wss.on('connection', function (ws, req) {
 }); 
 */
 
-app.get('/', (req, res) => {
-  res.json({ wtf: 'nothing here' });
-});
 
-app.post('/new-negotiation', (req, res) => {
-  res.json({ wtf: req.body });
-});
 
 /*
 expressServer.listen(888, function () {
