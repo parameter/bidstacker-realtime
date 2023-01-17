@@ -21,9 +21,8 @@ const httpServer = http.createServer(app);
 const wss = new websocket.Server({ server: httpServer, path: '/socket' });
 
 httpServer.listen( port, function listening() {
-    console.log( 'listening on ' + port );
+    console.log( 'listening on wft ' + port );
 });
-
 
 
 /*
