@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 const httpServer = http.createServer(app);
 const wss = new websocket.Server({ server: httpServer, path: '/socket' });
 
-httpServer.listen( port, function listening() {
+httpServer.listen( port, function() {
     console.log( 'listening on wft ' + port );
 });
 
