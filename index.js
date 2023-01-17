@@ -1,15 +1,28 @@
 'use strict';
 
+const port = 8888;
+const http = require('http');
 const express = require('express');
+const websocket = require('ws');
+const app = express();
+
 const path = require('path');
-const { createServer } = require('http');
 const bodyParser = require('body-parser');
 const corsMiddleware = require('./cors');
 
-const app = express();
 app.options('*', corsMiddleware);
 app.use(corsMiddleware);
 app.use(bodyParser.json());
+
+app.use( express.static('public') );
+
+
+const httpServer = http.createServer( credentials, app );
+const wss = new websocket.Server({ server: httpServer, path: '/socket' });
+
+httpServer.listen( port, function listening() {
+    console.log( 'listening on ' + port );
+});
 
 const expressServer = createServer(app);
 
