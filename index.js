@@ -3,15 +3,10 @@ require('dotenv').config();
 const http = require('http');
 const express = require('express');
 const websocket = require('ws');
+const addNewActiveUser = require('./db/add-new-active-user');
 const app = express();
-const getMongoDb = require('./db/db.js');
-
 
 const run = async ()  => {
-
-  const db = await getMongoDb();
-
-  db.collection('test').insertOne({'ytrewq': 666})
 
   const path = require('path');
   const bodyParser = require('body-parser');
@@ -24,8 +19,6 @@ const run = async ()  => {
 
   const httpServer = http.createServer(app);
   const wss = new websocket.Server({ server: httpServer, path: '/socket' });
-
-  var clients = [];
 
   wss.on('connection', function (ws, req) {
     var id = req.headers['sec-websocket-key'];
@@ -45,11 +38,25 @@ const run = async ()  => {
 
     ws.on('message', (data, isBinary) => {
       const message = isBinary ? data : data.toString();
-      console.log('client message is: ', message);
+      
+      addNewActiveUser({
+        user: message,
+        ws: ws
+      });
+
     });
 
-    ws.on('close', function () {
-      console.log('Closed already');
+    ws.on('close', (reasonCode, description) => {
+      
+      console.log('Socket CLOSED');
+      console.log(reasonCode, description);
+
+      /*
+      removeActiveUser({
+        user: message,
+        ws: ws
+      }); */
+
     });
   }); 
 
