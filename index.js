@@ -34,8 +34,9 @@ wss.on('connection', function (ws, req) {
     });
   },10000) */
 
-  ws.on('message', (message) => {
-    console.log('client user is: ', message);
+  ws.on('message', function message(data, isBinary) {
+    const message = isBinary ? data : data.toString();
+    console.log('client message is: ', message);
   });
 
   ws.on('close', function () {
