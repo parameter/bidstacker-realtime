@@ -23,9 +23,6 @@ const run = async ()  => {
   wss.on('connection', function (ws, req) {
     var id = req.headers['sec-websocket-key'];
 
-    // add client to an array
-    clients.push({'id': id, 'ws': ws});
-
     console.log('We are connected to this ID hopefully WTF ', id);
 
     /*
