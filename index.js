@@ -26,15 +26,16 @@ wss.on('connection', function (ws, req) {
 
   console.log('We are connected to this ID hopefully WTF ', id);
 
+  /*
   setTimeout(() => {
     clients.forEach((client) => {
       console.log('Try to send to ', client.id);
       client.ws.send('A message from the server to ' + client.id);
     });
-  },10000)
+  },10000) */
 
-  ws.on ('message', (user) => {
-    console.log('client user is: ' + user);
+  ws.on('message', (message) => {
+    console.log('client user is: ', message);
   });
 
   ws.on('close', function () {
