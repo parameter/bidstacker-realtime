@@ -33,6 +33,10 @@ wss.on('connection', function (ws, req) {
     });
   },10000)
 
+  ws.on ('message', (user) => {
+    console.log('client user is: ' + user);
+  });
+
   ws.on('close', function () {
     console.log('Closed already');
   });
