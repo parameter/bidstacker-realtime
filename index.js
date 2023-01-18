@@ -47,6 +47,7 @@ app.get('/test', (req, res) => {
 });
 
 app.post('/new-negotiation', (req, res) => {
+  console.log('The other server says: ', req.body);
   res.json({ wtf: req.body });
 });
 
