@@ -1,6 +1,4 @@
-'use strict';
-
-const port = 8888;
+const port = 8080;
 const http = require('http');
 const express = require('express');
 const websocket = require('ws');
