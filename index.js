@@ -43,7 +43,8 @@ const run = async ()  => {
 
     });
 
-    ws.on('close', (reasonCode, description) => {
+    ws.on('close', (reasonCode, _description) => {
+      const description = _description.toString();
       
       console.log('Socket CLOSED');
       console.log(reasonCode, description);
