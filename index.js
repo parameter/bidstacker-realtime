@@ -1,78 +1,71 @@
 const port = 8080;
+require('dotenv').config();
 const http = require('http');
 const express = require('express');
 const websocket = require('ws');
 const app = express();
-
-const path = require('path');
-const bodyParser = require('body-parser');
-const corsMiddleware = require('./cors');
-
-app.options('*', corsMiddleware);
-app.use(corsMiddleware);
-app.use(bodyParser.json());
+const getMongoDb = require('./db/db.js');
 
 
-const httpServer = http.createServer(app);
-const wss = new websocket.Server({ server: httpServer, path: '/socket' });
+const run = async ()  => {
 
-var clients = [];
+  const db = await getMongoDb();
 
-wss.on('connection', function (ws, req) {
-  var id = req.headers['sec-websocket-key'];
+  db.collection('test').insertOne({'ytrewq': 666})
 
-  // add client to an array
-  clients.push({'id': id, 'ws': ws});
+  const path = require('path');
+  const bodyParser = require('body-parser');
+  const corsMiddleware = require('./cors');
 
-  console.log('We are connected to this ID hopefully WTF ', id);
+  app.options('*', corsMiddleware);
+  app.use(corsMiddleware);
+  app.use(bodyParser.json());
 
-  /*
-  setTimeout(() => {
-    clients.forEach((client) => {
-      console.log('Try to send to ', client.id);
-      client.ws.send('A message from the server to ' + client.id);
+
+  const httpServer = http.createServer(app);
+  const wss = new websocket.Server({ server: httpServer, path: '/socket' });
+
+  var clients = [];
+
+  wss.on('connection', function (ws, req) {
+    var id = req.headers['sec-websocket-key'];
+
+    // add client to an array
+    clients.push({'id': id, 'ws': ws});
+
+    console.log('We are connected to this ID hopefully WTF ', id);
+
+    /*
+    setTimeout(() => {
+      clients.forEach((client) => {
+        console.log('Try to send to ', client.id);
+        client.ws.send('A message from the server to ' + client.id);
+      });
+    },10000) */
+
+    ws.on('message', (data, isBinary) => {
+      const message = isBinary ? data : data.toString();
+      console.log('client message is: ', message);
     });
-  },10000) */
 
-  ws.on('message', function message(data, isBinary) {
-    const message = isBinary ? data : data.toString();
-    console.log('client message is: ', message);
+    ws.on('close', function () {
+      console.log('Closed already');
+    });
+  }); 
+
+  httpServer.listen( port, function() {
+      console.log( 'listening on wft ' + port );
   });
 
-  ws.on('close', function () {
-    console.log('Closed already');
+  app.get('/test', (req, res) => {
+    res.json({ wtf: 'nothing here' });
   });
-}); 
 
-httpServer.listen( port, function() {
-    console.log( 'listening on wft ' + port );
-});
+  app.post('/new-negotiation', (req, res) => {
+    console.log('The other server says: ', req.body);
+    res.json({ wtf: req.body });
+  });
 
-app.get('/test', (req, res) => {
-  res.json({ wtf: 'nothing here' });
-});
+}
 
-app.post('/new-negotiation', (req, res) => {
-  console.log('The other server says: ', req.body);
-  res.json({ wtf: req.body });
-});
-
-
-/*
-const WebSocket = require('ws');
-
-const wss = new WebSocket.Server({ 
-  port: 8080, 
-  clientTracking: true 
-});
-
-
-*/
-
-
-
-/*
-expressServer.listen(888, function () {
-  console.log('Listening on http://0.0.0.0:888');
-});
-*/
+run();
