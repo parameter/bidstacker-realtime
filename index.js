@@ -6,6 +6,10 @@ const websocket = require('ws');
 const addNewActiveUser = require('./db/add-new-active-user');
 const app = express();
 
+// socket-io 
+const { Server } = require("socket.io");
+
+
 const run = async ()  => {
 
   const path = require('path');
@@ -16,47 +20,23 @@ const run = async ()  => {
   app.use(corsMiddleware);
   app.use(bodyParser.json());
 
+  
 
-  const httpServer = http.createServer(app);
-  const wss = new websocket.Server({ server: httpServer, path: '/socket' });
+  const io = new Server({
+    path: "/socket",
+    cors: {
+      origin: "https://bidstacker.vercel.app",
+      credentials: false
+    }
+  });
 
-  wss.on('connection', function (ws, req) {
-    var id = req.headers['sec-websocket-key'];
+  io.on("connection", (socket) => {
+    console.log('The Frakker is working!');
+  });
 
-    console.log('We are connected to this ID hopefully WTF ', id);
+  io.listen(port);
 
-    /*
-    setTimeout(() => {
-      clients.forEach((client) => {
-        console.log('Try to send to ', client.id);
-        client.ws.send('A message from the server to ' + client.id);
-      });
-    },10000) */
-
-    ws.on('message', (data, isBinary) => {
-      const message = isBinary ? data : data.toString();
-      
-      addNewActiveUser({
-        user: message,
-        ws: ws
-      });
-
-    });
-
-    ws.on('close', (reasonCode, _description) => {
-      const description = _description.toString();
-      
-      console.log('Socket CLOSED');
-      console.log(reasonCode, description);
-
-      /*
-      removeActiveUser({
-        user: message,
-        ws: ws
-      }); */
-
-    });
-  }); 
+  
 
   httpServer.listen( port, function() {
       console.log( 'listening on wft ' + port );
@@ -71,6 +51,6 @@ const run = async ()  => {
     res.json({ wtf: req.body });
   });
 
-}
+
 
 run();
