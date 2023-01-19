@@ -51,6 +51,6 @@ const run = async ()  => {
     res.json({ wtf: req.body });
   });
 
-
+}
 
 run();
