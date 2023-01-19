@@ -4,13 +4,8 @@ const http = require('http');
 const express = require('express');
 const websocket = require('ws');
 const addNewActiveUser = require('./db/add-new-active-user');
-const app = express();
+var app = express();
 
-// socket-io 
-const { Server } = require("socket.io");
-
-
-const run = async ()  => {
 
   const path = require('path');
   const bodyParser = require('body-parser');
@@ -20,33 +15,26 @@ const run = async ()  => {
   app.use(corsMiddleware);
   app.use(bodyParser.json());
 
-  
-
-  const io = new Server({
-    path: "/socket",
-    cors: {
-      origin: "https://bidstacker.vercel.app",
-      credentials: false
-    }
-  });
+  // sockets 
+  var server = require('http').Server(app)
+  var io = require('socket.io')(server);
 
   io.on("connection", (socket) => {
-    console.log('The Frakker is working!');
+    console.log('WE HAVE A CONNECTION', socket);
   });
 
-  io.listen(port);
 
+  // routes
+  app.get('/', async (req, res) => {
+      res.send({result: 'I am the result'});
+  });
+
+  app.post('/new-data', (req, res) => {
+    res.send({result: 'I am the result'});
+  });
+  
   
 
-  app.get('/test', (req, res) => {
-    res.json({ wtf: 'nothing here' });
-  });
-
-  app.post('/new-negotiation', (req, res) => {
-    console.log('The other server says: ', req.body);
-    res.json({ wtf: req.body });
-  });
-
-}
-
-run();
+  
+  server.listen(port)
+  console.log('On I guess');
