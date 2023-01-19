@@ -21,8 +21,8 @@ var app = express();
   const io = new Server(server, {
     cors: {
       origin: "https://whale-app-a6c8t.ondigitalocean.app",
-      allowedHeaders: ["my-custom-header"],
-      credentials: true
+      allowedHeaders: ["Access-Control-Allow-Origin"],
+      credentials: false
     }
   });
 
