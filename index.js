@@ -14,16 +14,19 @@ var app = express();
   app.options('*', corsMiddleware);
   app.use(corsMiddleware);
   app.use(bodyParser.json());
-
+ 
   // sockets 
   var server = require('http').Server(app)
   var io = require('socket.io')(server);
+
+  const socket = io('https://bidstacker.vercel.app', {transports: ['websocket']});
 
   io.on("connection", (socket) => {
     console.log('WE HAVE A CONNECTION', socket);
   });
 
 
+  
   // routes
   app.get('/', async (req, res) => {
       res.send({result: 'I am the result'});
