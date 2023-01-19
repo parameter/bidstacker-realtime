@@ -38,10 +38,6 @@ const run = async ()  => {
 
   
 
-  httpServer.listen( port, function() {
-      console.log( 'listening on wft ' + port );
-  });
-
   app.get('/test', (req, res) => {
     res.json({ wtf: 'nothing here' });
   });
