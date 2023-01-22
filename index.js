@@ -19,6 +19,7 @@ var app = express();
   const server = http.createServer(app);
 
   const io = new Server(server, {
+    path: "/",
     cors: {
       origin: "https://whale-app-a6c8t.ondigitalocean.app",
       allowedHeaders: ["Access-Control-Allow-Origin"],
@@ -31,7 +32,7 @@ var app = express();
   });
 
 
-  
+
   // routes 
   app.get('/', async (req, res) => {
       res.send({result: 'I am the result'});
