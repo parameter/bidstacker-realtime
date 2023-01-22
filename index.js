@@ -31,9 +31,8 @@ var app = express();
   });
 
 
-
+  
   // routes 
-  /*
   app.get('/', async (req, res) => {
       res.send({result: 'I am the result'});
   });
@@ -41,8 +40,6 @@ var app = express();
   app.post('/new-data', (req, res) => {
     res.send({result: 'I am the result'});
   });
-  
-  */
 
   
   server.listen(port)
