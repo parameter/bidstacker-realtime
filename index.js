@@ -28,7 +28,7 @@ var app = express();
   });
 
   io.on("connection", (socket) => {
-    console.log('WE HAVE A CONNECTION', socket);
+    console.log('WE HAVE A CONNECTION');
   });
 
 
