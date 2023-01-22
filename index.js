@@ -39,6 +39,7 @@ var app = express();
   });
 
   app.post('/new-data', (req, res) => {
+    console.log('req.body',req.body);
     res.send({result: 'I am the result'});
   });
 
